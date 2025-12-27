@@ -194,7 +194,7 @@ export default function Home() {
           >
             <Link href="/contact">
               <motion.button
-                className="btn-primary flex items-center gap-2 text-lg mx-auto"
+                className="bg-transparent border-none flex items-center gap-2 text-lg mx-auto text-white font-semibold hover:opacity-80 transition-opacity"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
