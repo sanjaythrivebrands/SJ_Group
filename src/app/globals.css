@@ -1,8 +1,88 @@
 @import "tailwindcss";
 
+/* ============================================
+   SJ GROUP - MODERN CLEAN EARTHY DESIGN SYSTEM
+   ============================================ */
+
+/* Base Theme Variables */
 :root {
+  /* Light Mode Colors (Default) */
   --background: #ffffff;
-  --foreground: #171717;
+  --background-secondary: #f8fafb;
+  --background-tertiary: #f0f4f5;
+  --foreground: #1a2b3c;
+  --foreground-muted: #5a6b7c;
+  --foreground-light: #8a9bac;
+  
+  /* Brand Colors - Modern Teal/Earthy */
+  --primary: #0d9488;
+  --primary-light: #14b8a6;
+  --primary-dark: #0f766e;
+  --primary-muted: rgba(13, 148, 136, 0.1);
+  
+  --secondary: #0891b2;
+  --secondary-light: #22d3ee;
+  
+  --accent: #f59e0b;
+  --accent-light: #fbbf24;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+  --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #0d3331 50%, #14b8a6 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(8, 145, 178, 0.05) 100%);
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(13, 148, 136, 0.15);
+  --glass-shadow: rgba(0, 0, 0, 0.08);
+  
+  /* Card Styles */
+  --card-bg: #ffffff;
+  --card-border: rgba(13, 148, 136, 0.12);
+  --card-hover-border: rgba(13, 148, 136, 0.4);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 30px rgba(13, 148, 136, 0.15);
+  
+  /* Navigation */
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-border: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Mode */
+.dark {
+  --background: #0a1214;
+  --background-secondary: #111d21;
+  --background-tertiary: #162428;
+  --foreground: #f0f4f5;
+  --foreground-muted: #9ca3af;
+  --foreground-light: #6b7280;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(17, 29, 33, 0.9);
+  --glass-border: rgba(20, 184, 166, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+  
+  /* Gradients */
+  --gradient-subtle: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%);
+  
+  /* Card Styles */
+  --card-bg: rgba(17, 29, 33, 0.8);
+  --card-border: rgba(20, 184, 166, 0.2);
+  --card-hover-border: rgba(20, 184, 166, 0.5);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 40px rgba(20, 184, 166, 0.2);
+  
+  /* Navigation */
+  --nav-bg: rgba(10, 18, 20, 0.95);
+  --nav-border: rgba(20, 184, 166, 0.1);
 }
 
 @theme inline {
@@ -12,15 +92,415 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+/* Fix letter cutting - add proper line height */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+p, li, span, a {
+  line-height: 1.8;
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+}
+
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(13, 148, 136, 0.3);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--card-border);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 20px rgba(13, 148, 136, 0.15);
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+
+.input-field {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: var(--background);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  color: var(--foreground);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-muted);
+}
+
+.input-field::placeholder {
+  color: var(--foreground-muted);
+}
+
+/* ============================================
+   HERO GRADIENT BACKGROUND
+   ============================================ */
+
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #0d2927 30%,
+    #0f3d3a 50%,
+    #115e5a 70%,
+    #14b8a6 100%
+  );
+  position: relative;
+}
+
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at top right,
+    rgba(20, 184, 166, 0.4) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Diagonal light rays effect */
+.hero-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 100px,
+    rgba(20, 184, 166, 0.03) 100px,
+    rgba(20, 184, 166, 0.03) 200px
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   SNOWFALL EFFECT
+   ============================================ */
+
+.snowfall {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  animation: snowfall linear infinite;
+  will-change: transform;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(100px) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* ============================================
+   CAROUSEL STYLES
+   ============================================ */
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  animation: scroll 30s linear infinite;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
+/* ============================================
+   EXPANDABLE CARD STYLES
+   ============================================ */
+
+.expandable-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expandable-card.expanded {
+  background: var(--background);
+}
+
+/* ============================================
+   INFOGRAPHIC STYLES
+   ============================================ */
+
+.infographic-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.infographic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   PRICING TOGGLE
+   ============================================ */
+
+.pricing-toggle {
+  background: var(--background-secondary);
+  border-radius: 9999px;
+  padding: 0.25rem;
+  display: inline-flex;
+}
+
+.pricing-toggle-btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--foreground-muted);
+}
+
+.pricing-toggle-btn.active {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   SCROLLBAR STYLES
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* ============================================
+   SELECTION STYLES
+   ============================================ */
+
+::selection {
+  background: rgba(13, 148, 136, 0.2);
+  color: var(--foreground);
+}
+
+/* ============================================
+   LANGUAGE DROPDOWN
+   ============================================ */
+
+.language-dropdown {
+  position: relative;
+}
+
+.language-flag {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+@media (max-width: 768px) {
+  .glass-card {
+    border-radius: 0.75rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .carousel-track {
+    animation: none;
+  }
+  
+  .snowflake {
+    display: none;
+  }
 }
